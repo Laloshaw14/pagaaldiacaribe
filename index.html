@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Paga tu Servicio | Aire</title>
+  <style>
+    :root{
+      --primary:#00B4D8;      /* Celeste principal */
+      --primary-dark:#0096C7; /* Celeste oscuro para hover */
+      --accent:#48CAE4;       /* Azul claro para detalles */
+      --text:#0f172a;         /* Texto principal */
+      --muted:#475569;        /* Texto secundario */
+      --card-stroke:rgba(255,255,255,0.35);
+    }
+
+    *{ margin:0; padding:0; box-sizing:border-box; }
+    html,body{ height:100%; font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; }
+    body{
+      display:flex; align-items:center; justify-content:center;
+      background: radial-gradient(1000px 600px at 20% 10%, #e0f7fa 0%, #caf0f8 50%, #ade8f4 100%);
+      overflow:hidden; position:relative;
+    }
+
+    /* Fondo con imagen + blur */
+    body::before{
+      content:"";
+      position:fixed; inset:0;
+      background-image:url("https://ifmnoticias.com/wp-content/uploads/2024/09/E9kh7v5WQAAe0a-1-1-1024x794.jpg"); /* cambia por fondo aire */
+      background-size:cover; background-position:center;
+      filter: blur(10px) brightness(0.7);
+      z-index:-3;
+      transform: scale(1.1);
+    }
+
+    /* Burbujas decorativas */
+    .blob{
+      position:fixed; border-radius:50%;
+      filter: blur(40px);
+      opacity:.35; z-index:-1;
+      animation: float 10s ease-in-out infinite;
+    }
+    .blob.one{ width:300px; height:300px; background:#90e0ef; top:8%; left:8%; animation-delay:0.2s; }
+    .blob.two{ width:240px; height:240px; background:#48cae4; bottom:10%; right:12%; animation-delay:0.8s; }
+    .blob.three{ width:220px; height:220px; background:#00b4d8; top:70%; left:18%; animation-delay:1.1s; }
+
+    @keyframes float{
+      0%,100%{ transform: translateY(0) translateX(0) scale(1); }
+      50%{ transform: translateY(-16px) translateX(8px) scale(1.02); }
+    }
+
+    /* Tarjeta principal */
+    .card{
+      width:min(92vw, 480px);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      background: linear-gradient(180deg, rgba(255,255,255,0.65), rgba(255,255,255,0.35));
+      border:1px solid var(--card-stroke);
+      border-radius:28px;
+      box-shadow: 0 20px 50px rgba(2, 6, 23, .25);
+      padding: 40px 32px 30px;
+      position:relative;
+      animation: rise .85s ease-out both;
+    }
+
+    @keyframes rise{
+      from{ opacity:0; transform: translateY(40px) scale(.98); }
+      to{ opacity:1; transform: translateY(0) scale(1); }
+    }
+
+    /* Cinta superior */
+    .ribbon{
+      position:absolute; inset:0 0 auto 0; height:8px;
+      background: linear-gradient(90deg, var(--accent), var(--primary));
+      border-top-left-radius:28px; border-top-right-radius:28px;
+      overflow:hidden;
+    }
+
+    /* Logo círculo */
+    .logo-circle{
+      width:62px; height:62px; border-radius:18px;
+      display:grid; place-items:center;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color:white; font-size:28px;
+      box-shadow: 0 8px 20px rgba(0, 180, 216,.35);
+      margin: 6px 0 18px;
+      animation: pulse 2.6s ease-in-out infinite;
+    }
+    @keyframes pulse{
+      0%,100%{ transform: scale(1); }
+      50%{ transform: scale(1.05); }
+    }
+
+    h1{
+      font-size:1.7rem; line-height:1.2; color:var(--text);
+      text-align:center; margin-bottom:10px; font-weight:800;
+    }
+    .subtitle{
+      text-align:center; color:var(--muted);
+      font-size:1rem; margin-bottom:22px;
+    }
+
+    /* Badge seguridad */
+    .secure-badge{
+      display:inline-flex; gap:8px; align-items:center;
+      background: rgba(16,185,129,.12);
+      color:#065f46; font-weight:600; font-size:.9rem;
+      border:1px solid rgba(16,185,129,.25);
+      padding:8px 12px; border-radius:999px;
+      margin: 6px auto 18px;
+    }
+
+    /* Botón */
+    .cta{
+      display:block; width:100%;
+      text-align:center; text-decoration:none;
+      padding:16px 20px; border-radius:14px;
+      background: linear-gradient(180deg, var(--primary), var(--primary-dark));
+      color:white; font-weight:800; font-size:1.05rem;
+      box-shadow: 0 12px 24px rgba(0, 180, 216,.35);
+      margin-top:8px;
+      transition: all .2s ease;
+    }
+    .cta:hover{ transform: translateY(-2px); box-shadow:0 14px 30px rgba(0,180,216,.45); }
+
+    .note{
+      text-align:center; margin-top:14px; font-size:.9rem; color:#0b3a2a;
+    }
+
+    .trust{
+      margin-top:20px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;
+      color:#0f172a; font-size:.78rem; opacity:.8;
+    }
+  </style>
+</head>
+<body>
+  <div class="blob one"></div>
+  <div class="blob two"></div>
+  <div class="blob three"></div>
+
+  <main class="card" role="main" aria-labelledby="titulo">
+    <div class="ribbon"></div>
+
+    <div class="logo-circle">⚡</div>
+
+    <h1 id="titulo">Paga tu factura de Aire</h1>
+    <p class="subtitle">Realiza el pago de tu servicio de aire acondicionado de forma rápida y segura.</p>
+
+    <div class="secure-badge">
+      🔒 TLS activo • Cifrado 256-bit
+    </div>
+
+    <a class="cta" href="#" role="button">Pagar Ahora</a>
+
+    <p class="note">✔️ Transacción protegida y segura.</p>
+
+    <div class="trust">
+      <span>✅ PCI-DSS Ready</span>
+      <span>✅ 3-D Secure</span>
+      <span>✅ Anti-fraude</span>
+    </div>
+  </main>
+</body>
+</html>
